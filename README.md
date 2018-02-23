@@ -34,3 +34,24 @@ If you check its source code, I'll see the following:
 ```
 
 The information we want is not on the source code, because after the page loads, it fetches the `dummy.json` file and changes the content of the `li` dynamically.
+
+To get around this we need to use `jsdom`. It loads the page's source and executes the JavaScript as if it was a browser, updating the DOM.
+
+In the file `app.js`, we have:
+
+```
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const cheerio = require('cheerio')
+
+JSDOM.fromURL("https://rawgit.com/alexandretok/scraping-javascript-websites/master/dummy.html", {runScripts: "dangerously", pretendToBeVisual: true, resources: "usable"}).then(dom => {
+    console.log("DOM Created. Waiting a while for JavaScript code to run...");
+    setTimeout(() => {
+        // Parsing DOM with cheerio for easier extraction
+        const $ = cheerio.load(dom.serialize());
+        console.log($('li').text());
+    }, 2000);
+});
+```
+
+![Warning](http://dogmasoft.in/images/warning.png) Warning: using the options `runScripts: "dangerously"` can be dangerous if you don't trust the website.
