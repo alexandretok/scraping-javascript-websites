@@ -8,5 +8,5 @@ JSDOM.fromURL("https://rawgit.com/alexandretok/scraping-javascript-websites/mast
         // Parsing DOM with cheerio for easier extraction
         const $ = cheerio.load(dom.serialize());
         console.log($('li').text());
-    }, 500);
+    }, 2000);
 });
