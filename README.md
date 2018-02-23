@@ -55,3 +55,9 @@ JSDOM.fromURL("https://rawgit.com/alexandretok/scraping-javascript-websites/mast
 ```
 
 ![Warning](http://dogmasoft.in/images/warning.png) Warning: using the options `runScripts: "dangerously"` can be dangerous if you don't trust the website.
+
+After fetching the source code, we receive a DOM object. We have to wait a little bit for the JS code to run (this interval can vary according to the website you're crawling).
+
+After that, we use `cheerio` to easily extract the information we want using a css-like query.
+
+And... that's it!
