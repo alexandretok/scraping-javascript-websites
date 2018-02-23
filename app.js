@@ -1,4 +1,3 @@
-var request = require('request');
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const cheerio = require('cheerio')
